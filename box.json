@@ -1,0 +1,7 @@
+{
+  "files": ["bin/console"],
+  "directories": ["src", "etc", "vendor"],
+  "main": "bin/console",
+  "output": "csvmanip",
+  "stub": true
+}
