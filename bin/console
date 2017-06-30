@@ -2,6 +2,9 @@
 <?php
 
 use App\Kernel;
+use App\Command\SlugHeaders;
+use App\Command\Headers;
+use App\Command\Uniques;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Dotenv\Dotenv;
 use Symfony\Component\Console\Input\ArgvInput;
@@ -30,5 +33,9 @@ if ($debug && class_exists(Debug::class)) {
 
 $kernel = new Kernel($env, $debug);
 $application = new Application($kernel);
-$application->addCommands([new App\Command\SlugHeaders()]);
+$application->addCommands([
+    new Headers(),
+    new SlugHeaders(),
+    new Uniques()
+]);
 $application->run($input);

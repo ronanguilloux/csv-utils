@@ -2,7 +2,7 @@
 
 namespace App\Command;
 
-use App\Util\Quick;
+use App\Util\CSV;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -17,34 +17,37 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 class Headers extends Command
 {
+    /**
+     * {@inheritdoc}
+     */
     protected function configure()
     {
         $this
             // the name of the command (the part after "bin/console")
             ->setName('csv:head')
-
             // the short description shown while running "php bin/console list"
             ->setDescription("Fetch your CSV's headers")
-
             // the full command description shown when running the command with
             // the "--help" option
-            ->setHelp("This command allows you to perform quick actions: type csv quick <action> help for more")
-            ->addArgument('path', InputArgument::REQUIRED, 'CSV path to use', null)
-        ;
+            ->setHelp("This command allows you to perform csv actions: type csv csv <action> help for more")
+            ->addArgument('path', InputArgument::REQUIRED, 'CSV path to use', null);
 
     }
 
+    /**
+     * {@inheritdoc}
+     */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $path = $input->getArgument('path');
-        if(!is_file($path)) {
+        if (!is_file($path)) {
             throw new \InvalidArgumentException("$path is not a valid path file");
         }
 
-        $quick = new Quick();
-        $result = $quick->getHeaders($path);
+        $csv = new CSV();
+        $result = $csv->getHeaders($path);
 
-        $output->writeln(join(';',$result));
+        $output->writeln(join(';', $result));
 
 
     }
