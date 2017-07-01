@@ -1,11 +1,13 @@
 # csv-utils
 
 `csv-utils` is (yet another) CLI tool for quick-win CSV manipulations
- 
+
 It mostly performs extractions. It's also a starting point for further complex, custom-dev based CSV manipulations.
 
+Made with :heart: using [Symfony 4](http://fabien.potencier.org/symfony4-demo.html) and some [nice libs](composer.json).
 
-## Available commands: 
+
+## Available commands
 
 ```bash
 bin/console list csv
@@ -32,11 +34,11 @@ bin/console csv:column:uniques <path> <column_index_or_title>
 Example
 
 ```bash
-bin/console csv:cols:uniques share/examples/uniques.csv 5 
-bin/console csv:cols:uniques share/examples/uniques.csv "C'est une colonne en Français" 
+bin/console csv:cols:uniques share/examples/uniques.csv 5
+bin/console csv:cols:uniques share/examples/uniques.csv "My Column Title"
 ```
 
-## Build it as a phar 
+## Build it as a phar (broken for now)
 
 The phar PHP utility provides a way to put entire PHP applications
 into a single file called a "phar" (PHP Archive)
@@ -56,5 +58,5 @@ Then use it:
 ```
 
 ## License
- 
+
 MIT
