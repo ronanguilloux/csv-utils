@@ -5,3 +5,4 @@
 /web/bundles/
 
 ###< symfony/framework-bundle ###
+csv-utils.phar

@@ -11,13 +11,13 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
- * Uniques
+ * Replace
  *
  * @author    Ronan Guilloux <ronan.guilloux@akeneo.com>
  * @copyright 2016 Akeneo SAS (http://www.akeneo.com)
  * @license   http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
  */
-class Uniques extends Command
+class Replace extends Command
 {
 
     /**
@@ -26,11 +26,14 @@ class Uniques extends Command
     protected function configure()
     {
         $this
-            ->setName('csv:cols:uniques')
-            ->setDescription("Get a deduplicated list of values from a column index or title")
-            ->setHelp("This command fetch a column's unique values")
+            ->setName('csv:cols:replace')
+            ->setDescription("Replace a value by another in a whole column")
+            ->setHelp("This command replaces a value by another in a column's records")
             ->addArgument('path', InputArgument::REQUIRED, 'CSV path to use', null)
-            ->addArgument('column', InputArgument::REQUIRED, 'Column index/title to use', null);
+            ->addArgument('column', InputArgument::REQUIRED, 'Column index/title to use', null)
+            ->addArgument('search', InputArgument::REQUIRED, 'haystack', null)
+            ->addArgument('replace', InputArgument::REQUIRED, 'needle', null)
+        ;
 
     }
 
@@ -44,8 +47,10 @@ class Uniques extends Command
             throw new \InvalidArgumentException("$path is not a valid path file");
         }
         $column = $input->getArgument('column');
+        $search = $input->getArgument('search');
+        $replace = $input->getArgument('replace');
         $csv = new CSV();
-        $result = $csv->getColumnRecords($path, $column, true);
+        $result = str_replace($search, $replace, $csv->getColumnRecords($path, $column));
         $output->writeln(join("\n", $result));
     }
 }

@@ -1,7 +1,8 @@
 {
-  "files": ["bin/console"],
+  "files": ["bin/console", ".env"],
+  "chmod": "0755",
   "directories": ["src", "etc", "vendor"],
   "main": "bin/console",
-  "output": "csvmanip",
+  "output": "csv-utils.phar",
   "stub": true
 }

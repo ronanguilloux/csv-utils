@@ -74,6 +74,42 @@ class CSV
     }
 
     /**
+     * @param mixed $column
+     * @param array $headers
+     * @param int $count
+     * @return string
+     */
+    public static function validateColumnParameter($column, $headers)
+    {
+        if (!is_numeric($column) && is_string($column) && !in_array($column, $headers)) {
+            throw new \InvalidArgumentException("$column is not a existing column title in your CSV");
+        }
+
+        if (is_numeric($column) && ($column > count($headers))) {
+            throw new \InvalidArgumentException("$column is not a existing column index in your CSV");
+        }
+
+        if (is_numeric($column)) {
+            $column = (int)$column;
+        }
+
+        return $column;
+    }
+
+    public function getColumnRecords($path, $column, $unique = false)
+    {
+        $records = $this->getRecords($path);
+        $column = self::validateColumnParameter($column, $this->getHeaders($path));
+
+        if($unique) {
+
+            return array_unique(iterator_to_array($records->fetchColumn($column)));
+        }
+
+        return iterator_to_array($records->fetchColumn($column));
+    }
+
+    /**
      * @param string $path
      * @param string $delimiter
      * @param string $enclosure

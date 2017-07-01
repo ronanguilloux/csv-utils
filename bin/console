@@ -5,6 +5,7 @@ use App\Kernel;
 use App\Command\SlugHeaders;
 use App\Command\Headers;
 use App\Command\Uniques;
+use App\Command\Replace;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Dotenv\Dotenv;
 use Symfony\Component\Console\Input\ArgvInput;
@@ -36,6 +37,7 @@ $application = new Application($kernel);
 $application->addCommands([
     new Headers(),
     new SlugHeaders(),
-    new Uniques()
+    new Uniques(),
+    new Replace()
 ]);
 $application->run($input);
